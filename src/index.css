@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-serif: 'Newsreader', serif;
+    --font-handwritten: 'Caveat', cursive;
+
+    /* Cute Pastel Palette Tokens */
+    --pastel-pink: #FF85A2;
+    --pastel-pink-soft: #FDA4AF;
+    --pastel-mint: #5EEAD4;
+    --pastel-mint-soft: #99F6E4;
+    --pastel-yellow: #FDE047;
+    --pastel-yellow-soft: #FEF08A;
+    --pastel-lavender: #C084FC;
+    --pastel-lavender-soft: #E9D5FF;
+    --pastel-peach: #FB923C;
+    --pastel-peach-soft: #FED7AA;
+    --pastel-lime: #D4FF3F;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #0D0C10;
+    color: #FDFCFB;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    background-image: 
+      radial-gradient(ellipse at 15% 10%, rgba(255, 133, 162, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 30%, rgba(94, 234, 212, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 70%, rgba(253, 224, 71, 0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 90%, rgba(192, 132, 252, 0.04) 0%, transparent 50%);
+  }
+
+  ::selection {
+    background-color: #FF85A2;
+    color: #0D0C10;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .font-handwritten {
+    font-family: var(--font-handwritten);
+  }
+}
+
+/* Cute stroke outlines */
+.text-stroke-lime {
+  color: transparent;
+  -webkit-text-stroke: 1px #D4FF3F;
+}
+
+.text-stroke-pink {
+  color: transparent;
+  -webkit-text-stroke: 1px #FF85A2;
+}
+
+.text-stroke-mint {
+  color: transparent;
+  -webkit-text-stroke: 1px #5EEAD4;
+}
+
+.text-stroke-yellow {
+  color: transparent;
+  -webkit-text-stroke: 1px #FDE047;
+}
+
+.text-stroke-white {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(253, 252, 251, 0.4);
+}
+
+/* Technical & stationery grid backgrounds */
+.bg-tech-grid {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-paper-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.bg-tech-dots {
+  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Washi Tape Strip Mixins */
+.washi-tape-pink {
+  background: repeating-linear-gradient(45deg, #FDA4AF, #FDA4AF 6px, #FFE4E6 6px, #FFE4E6 12px);
+}
+
+.washi-tape-mint {
+  background: repeating-linear-gradient(-45deg, #5EEAD4, #5EEAD4 6px, #CCFBF1 6px, #CCFBF1 12px);
+}
+
+.washi-tape-yellow {
+  background: repeating-linear-gradient(45deg, #FDE047, #FDE047 6px, #FEF9C3 6px, #FEF9C3 12px);
+}
+
+.washi-tape-lavender {
+  background: repeating-linear-gradient(-45deg, #C084FC, #C084FC 6px, #F3E8FF 6px, #F3E8FF 12px);
+}
+
+.washi-tape-peach {
+  background: repeating-linear-gradient(45deg, #FB923C, #FB923C 6px, #FFEDD5 6px, #FFEDD5 12px);
+}
+
+/* Torn paper sawtooth / jagged edge helper */
+.torn-edge-bottom {
+  mask-image: linear-gradient(to bottom, black calc(100% - 10px), transparent 100%),
+              radial-gradient(circle at 10px bottom, black 10px, transparent 10px);
+}
+
+/* Paper grain overlay */
+.paper-texture {
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0),
+    radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+
+/* Subtle glow accent */
+.glow-accent {
+  box-shadow: 0 0 40px -10px rgba(255, 133, 162, 0.25);
+}
+
+.glow-accent-mint {
+  box-shadow: 0 0 35px -8px rgba(94, 234, 212, 0.25);
+}
+
+.glow-accent-yellow {
+  box-shadow: 0 0 35px -8px rgba(253, 224, 71, 0.25);
+}
+
+.glow-accent-sm {
+  box-shadow: 0 0 20px -5px rgba(212, 255, 63, 0.28);
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D0C10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27252E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF85A2;
+}
+
+
