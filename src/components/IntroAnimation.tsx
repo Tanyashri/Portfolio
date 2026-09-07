@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -9,157 +10,117 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   const prefersReducedMotion = useReducedMotion();
   const [isDone, setIsDone] = useState(false);
 
+  const handleDismiss = () => {
+    setIsDone(true);
+    onComplete();
+  };
+
   useEffect(() => {
-    // Total sequence duration: ~2.1s (or 0.4s if reduced motion is requested)
-    const duration = prefersReducedMotion ? 400 : 2100;
+    // Snappy sequence duration (~950ms or instant 200ms on reduced motion)
+    const duration = prefersReducedMotion ? 200 : 950;
 
     const timer = setTimeout(() => {
-      setIsDone(true);
-      onComplete();
+      handleDismiss();
     }, duration);
 
-    return () => clearTimeout(timer);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+        handleDismiss();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [onComplete, prefersReducedMotion]);
 
   if (isDone) return null;
-
-  // Reduced motion fallback
-  if (prefersReducedMotion) {
-    return (
-      <motion.div
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="fixed inset-0 z-[100] bg-[#0D0C10] flex items-center justify-center pointer-events-none"
-      >
-        <div className="text-center font-display text-2xl font-bold tracking-tight text-white">
-          TANYASHRI M.
-        </div>
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        y: -16,
-        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+        y: -10,
+        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
       }}
-      className="fixed inset-0 z-[100] bg-[#0D0C10] text-[#FDFCFB] flex flex-col justify-between p-6 sm:p-12 select-none overflow-hidden"
+      onClick={handleDismiss}
+      className="fixed inset-0 z-[100] bg-[#0D0C10] text-[#FDFCFB] flex flex-col justify-between p-6 sm:p-10 select-none overflow-hidden cursor-pointer"
     >
       {/* Subtle fine technical grid */}
       <div 
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage: 'linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
+          backgroundSize: '36px 36px'
         }}
       />
 
-      {/* PHASE 1: Top Technical Metadata Bar */}
+      {/* Top Header Row */}
       <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between font-mono text-[11px] text-white/40">
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.15, ease: 'easeOut' }}
-          className="flex items-center gap-2.5"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#5EEAD4]" />
-          <span className="tracking-[0.2em] uppercase font-semibold text-white/60">
-            TANYASHRI M. / 01
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#5EEAD4] animate-pulse" />
+          <span className="tracking-[0.2em] uppercase font-semibold text-white/70">
+            TANYASHRI M. // CSE
           </span>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.25, ease: 'easeOut' }}
-          className="tracking-[0.25em] uppercase text-white/40 hidden sm:block"
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDismiss();
+          }}
+          className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] text-white/60 hover:text-white border border-white/10 transition-colors flex items-center gap-1 cursor-pointer"
         >
-          PORTFOLIO // 2026
-        </motion.div>
+          <span>SKIP INTRO</span>
+          <ArrowRight className="w-3 h-3 text-[#5EEAD4]" />
+        </button>
       </div>
 
-      {/* CENTER STAGE: Editorial Identity Reveal */}
+      {/* Center Stage: Fast & Bold Identity */}
       <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center w-full max-w-5xl mx-auto px-4">
-        {/* PHASE 2: Primary Name Reveal */}
-        <div className="w-full flex items-center justify-center overflow-hidden py-2">
-          <motion.h1
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.65,
-              delay: 0.35,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-            style={{ fontSize: 'clamp(1.75rem, 6.5vw, 4.75rem)', whiteSpace: 'nowrap' }}
-            className="font-black font-display tracking-tight text-[#FDFCFB] leading-none shrink-0 inline-block text-center"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex flex-col items-center"
+        >
+          <h1
+            style={{ fontSize: 'clamp(2rem, 7vw, 4.5rem)', whiteSpace: 'nowrap' }}
+            className="font-black font-display tracking-tight text-[#FDFCFB] leading-none text-center"
           >
-            TANYASHRI&nbsp;M.
-          </motion.h1>
-        </div>
+            TANYASHRI M.
+          </h1>
 
-        {/* PHASE 3: Identity & Discipline Hierarchy */}
-        <div className="w-full flex items-center justify-center overflow-hidden mt-3 sm:mt-5">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.55,
-              delay: 0.75,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-            style={{ whiteSpace: 'nowrap', fontSize: 'clamp(0.7rem, 2vw, 0.875rem)' }}
-            className="font-mono font-semibold tracking-[0.2em] sm:tracking-[0.25em] text-[#5EEAD4] uppercase shrink-0"
+          <div
+            style={{ fontSize: 'clamp(0.75rem, 2vw, 0.9rem)' }}
+            className="font-mono font-semibold tracking-[0.22em] text-[#5EEAD4] uppercase mt-3"
           >
-            COMPUTER SCIENCE ENGINEER
-          </motion.div>
-        </div>
-
-        <div className="w-full flex items-center justify-center overflow-hidden mt-1.5 sm:mt-2">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.55,
-              delay: 1.05,
-              ease: [0.16, 1, 0.3, 1]
-            }}
-            style={{ whiteSpace: 'nowrap', fontSize: 'clamp(0.65rem, 1.6vw, 0.75rem)' }}
-            className="font-mono text-white/50 tracking-[0.18em] sm:tracking-[0.2em] uppercase shrink-0"
-          >
-            AI / ML · SOFTWARE · SYSTEMS
-          </motion.div>
-        </div>
+            COMPUTER SCIENCE ENGINEER · AI/ML BUILDER
+          </div>
+        </motion.div>
       </div>
 
-      {/* PHASE 4: Minimal Progress Line Indicator */}
-      <div className="relative z-10 w-full max-w-xs sm:max-w-sm mx-auto flex flex-col items-center gap-2">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 1.15 }}
-          className="w-full flex items-center justify-between font-mono text-[10px] text-white/35 tracking-[0.25em] uppercase"
-        >
-          <span>PORTFOLIO</span>
-          <span className="text-[#5EEAD4]/70">READY</span>
-        </motion.div>
-
-        <div className="w-full h-[1.5px] bg-white/[0.08] rounded-full overflow-hidden">
+      {/* Bottom Progress Bar Indicator */}
+      <div className="relative z-10 w-full max-w-xs mx-auto flex flex-col items-center gap-2">
+        <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{
-              duration: 0.65,
-              delay: 1.25,
-              ease: [0.22, 1, 0.36, 1]
+              duration: 0.75,
+              ease: 'linear'
             }}
             style={{ originX: 0 }}
-            className="h-full bg-white/70"
+            className="h-full bg-[#FF85A2]"
           />
         </div>
+        <span className="font-mono text-[9px] text-white/30 tracking-[0.2em] uppercase">
+          CLICK ANYWHERE TO ENTER
+        </span>
       </div>
     </motion.div>
   );

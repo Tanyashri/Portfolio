@@ -13,14 +13,14 @@ export const SectionReveal: React.FC<SectionRevealProps> = ({
   children,
   className = '',
   delay = 0,
-  yOffset = 32,
-  duration = 0.7
+  yOffset = 12,
+  duration = 0.4
 }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: yOffset }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
+      viewport={{ once: true, amount: 0.01, margin: "0px 0px 80px 0px" }}
       transition={{
         duration,
         delay,

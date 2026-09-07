@@ -15,7 +15,7 @@ export const AboutEditorial: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative">
+    <section id="about" className="pt-16 pb-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative">
       {/* Section Header Tag */}
       <div className="flex items-center gap-2 font-mono text-xs text-[#FF85A2] mb-8 uppercase tracking-[0.2em]">
         <span>// 01 ABOUT & SCRAPBOOK</span>
@@ -368,38 +368,6 @@ export const AboutEditorial: React.FC = () => {
             </span>
           </div>
         </motion.div>
-      </div>
-
-      {/* Mini Scrapbook Footer Badge */}
-      <div className="mt-12 text-center">
-        <p className="font-['Caveat',cursive] text-2xl font-bold text-[#FF85A2] flex items-center justify-center gap-2">
-          <span>say hi</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" className="inline-block">
-            <path
-              d="M12 20.5s-7-4.4-9.3-8.8C1 8.6 2.4 5.4 5.6 4.7c2-.4 3.8.7 4.9 2.6.4-2.1 2.5-3.4 4.7-3 3.2.6 4.7 3.8 3.1 6.9C16 14.7 12 20.5 12 20.5z"
-              fill="#FF85A2"
-              stroke="#FF85A2"
-              strokeWidth="1"
-            />
-          </svg>
-        </p>
-        <p className="font-mono text-xs text-white/60 mt-1">
-          <a href="mailto:tanyashrim2005@gmail.com" className="hover:text-[#5EEAD4] transition-colors underline decoration-dotted">
-            tanyashrim2005@gmail.com
-          </a>
-          {' · '}
-          <a href="https://linkedin.com/in/tanyashri-m" target="_blank" rel="noreferrer" className="hover:text-[#5EEAD4] transition-colors">
-            LinkedIn
-          </a>
-          {' · '}
-          <a href="https://github.com/tanyashri" target="_blank" rel="noreferrer" className="hover:text-[#5EEAD4] transition-colors">
-            GitHub
-          </a>
-          {' · '}
-          <a href="https://leetcode.com/tanyashri" target="_blank" rel="noreferrer" className="hover:text-[#5EEAD4] transition-colors">
-            LeetCode
-          </a>
-        </p>
       </div>
     </section>
   );
