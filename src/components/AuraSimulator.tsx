@@ -141,9 +141,9 @@ export const AuraSimulator: React.FC = () => {
                 <span className="text-white font-bold">{log.id}</span>
                 <span className="text-[10px] text-white/40">{log.featureVector}</span>
               </div>
-              <div className="flex items-center gap-3 text-[11px]">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10.5px] sm:text-[11px]">
                 <span className="text-white/60">Prod: <strong className="text-white">{log.prodPred}</strong></span>
-                <ArrowRight className="w-3 h-3 text-white/30" />
+                <ArrowRight className="w-3 h-3 text-white/30 hidden sm:inline" />
                 <span className="text-white/60">Challenger: <strong className="text-[#D4FF3F]">{log.challengerPred}</strong></span>
                 <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                   log.divergence > 0.15 ? 'bg-amber-500/20 text-amber-300' : 'bg-white/10 text-white/60'

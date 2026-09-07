@@ -182,21 +182,25 @@ export const StackGraphTracker: React.FC<StackGraphTrackerProps> = ({
       });
     };
 
+    let isVisible = true;
+
     const updateDimensions = () => {
       if (!canvas || !container) return;
       const clientW = container.clientWidth || 700;
       const isMobile = clientW < 640;
-      const targetH = isMobile ? 350 : 420;
+      const targetH = isMobile ? 340 : 420;
 
       // Handle HiDPI / retina displays crispness
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = clientW;
       height = targetH;
 
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
 
       initNodePositions(width, height);
@@ -209,7 +213,20 @@ export const StackGraphTracker: React.FC<StackGraphTrackerProps> = ({
     });
     resizeObserver.observe(container);
 
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+          render();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(container);
+
     const render = () => {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
       const isMobile = width < 640;
@@ -359,54 +376,50 @@ export const StackGraphTracker: React.FC<StackGraphTrackerProps> = ({
 
     return () => {
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
   }, [activeSkillName, hoveredNodeId, activeFilter]);
 
-  // Handle Canvas Mouse Interactivity
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  // Handle Canvas Mouse & Touch Interactivity
+  const handlePointInteraction = (clientX: number, clientY: number, isClick: boolean) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+    const mx = clientX - rect.left;
+    const my = clientY - rect.top;
 
     const hit = nodesRef.current.find((n) => {
       const dx = n.x - mx;
       const dy = n.y - my;
-      return Math.sqrt(dx * dx + dy * dy) < n.radius + 6;
+      return Math.sqrt(dx * dx + dy * dy) < n.radius + 10;
     });
 
     if (hit) {
       setHoveredNodeId(hit.id);
       if (hit.type === 'skill') {
         onSelectSkill(hit.label);
+      } else if (hit.type === 'project' && isClick) {
+        const found = PROJECTS.find((p) => p.id === hit.id);
+        if (found) onSelectProject(found);
       }
-    } else {
+    } else if (!isClick) {
       setHoveredNodeId(null);
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    handlePointInteraction(e.clientX, e.clientY, false);
+  };
+
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+    handlePointInteraction(e.clientX, e.clientY, true);
+  };
 
-    const hit = nodesRef.current.find((n) => {
-      const dx = n.x - mx;
-      const dy = n.y - my;
-      return Math.sqrt(dx * dx + dy * dy) < n.radius + 6;
-    });
-
-    if (hit) {
-      if (hit.type === 'skill') {
-        onSelectSkill(hit.label);
-      } else if (hit.type === 'project') {
-        const found = PROJECTS.find((p) => p.id === hit.id);
-        if (found) onSelectProject(found);
-      }
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      handlePointInteraction(touch.clientX, touch.clientY, true);
     }
   };
 
@@ -441,18 +454,20 @@ export const StackGraphTracker: React.FC<StackGraphTrackerProps> = ({
       </div>
 
       {/* Interactive 2D Graph Canvas */}
-      <div className="relative cursor-crosshair">
+      <div className="relative cursor-crosshair touch-none">
         <canvas
           ref={canvasRef}
           onMouseMove={handleMouseMove}
           onClick={handleCanvasClick}
-          className="w-full h-[420px] block"
+          onTouchStart={handleTouchStart}
+          className="w-full h-[340px] sm:h-[420px] block"
         />
 
         {/* Overlay Helper Badge */}
         <div className="absolute bottom-3 left-4 pointer-events-none text-[10px] font-mono text-white/40 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF3F]" />
-          <span>Click/hover any node to trace Cypher paths & verified repo implementations</span>
+          <span className="hidden sm:inline">Click/hover any node to trace Cypher paths & verified repo implementations</span>
+          <span className="sm:hidden">Tap any node to trace stack implementation</span>
         </div>
       </div>
 

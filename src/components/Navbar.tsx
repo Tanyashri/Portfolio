@@ -13,25 +13,35 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 24);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
 
-      const sectionIds = ['work', 'stack', 'about', 'experience', 'beyond-code', 'contact'];
-      const scrollPosition = window.scrollY + 200;
+          const sectionIds = ['work', 'stack', 'about', 'experience', 'beyond-code', 'contact'];
+          const scrollPosition = window.scrollY + 220;
 
-      for (const id of sectionIds) {
-        const element = document.getElementById(id);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(id);
-            break;
+          if (window.scrollY < 120) {
+            setActiveSection('hero');
+          } else {
+            for (let i = sectionIds.length - 1; i >= 0; i--) {
+              const id = sectionIds[i];
+              const element = document.getElementById(id);
+              if (element) {
+                const rect = element.getBoundingClientRect();
+                const elementTop = rect.top + window.scrollY;
+                if (scrollPosition >= elementTop - 50) {
+                  setActiveSection(id);
+                  break;
+                }
+              }
+            }
           }
-        }
-      }
-      if (window.scrollY < 150) {
-        setActiveSection('hero');
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 

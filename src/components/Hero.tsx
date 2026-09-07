@@ -82,17 +82,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
             <motion.h1 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.1 }}
               variants={{
                 hidden: {},
                 visible: {
                   transition: {
-                    staggerChildren: 0.015,
-                    delayChildren: 0.1
+                    staggerChildren: 0.04,
+                    delayChildren: 0.05
                   }
                 }
               }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-black font-display tracking-tighter text-[#FDFCFB] leading-[0.98] flex flex-wrap gap-x-[0.28em] gap-y-1"
+              className="text-3.5xl sm:text-5xl md:text-6xl lg:text-[74px] font-black font-display tracking-tight text-[#FDFCFB] leading-[1.05] sm:leading-[0.98] flex flex-wrap gap-x-[0.25em] gap-y-1.5"
             >
               {[
                 { text: "I", highlight: false },
@@ -110,39 +110,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
                 { text: "QUESTIONABLE", highlight: true },
                 { text: "IDEA.", highlight: true }
               ].map((word, wIdx) => (
-                <span
+                <motion.span
                   key={wIdx}
-                  className={`inline-flex whitespace-nowrap ${
+                  variants={{
+                    hidden: { opacity: 0, y: 14 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0, 
+                      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } 
+                    }
+                  }}
+                  className={`inline-block select-none ${
                     word.highlight
-                      ? 'text-stroke-pink hover:text-[#FF85A2] transition-colors duration-300'
+                      ? 'text-stroke-pink hover:text-[#FF85A2] transition-colors duration-200'
                       : 'hover:text-[#5EEAD4] transition-colors duration-200'
                   }`}
                 >
-                  {word.text.split('').map((char, cIdx) => (
-                    <motion.span
-                      key={cIdx}
-                      variants={{
-                        hidden: { 
-                          opacity: 0, 
-                          y: 18, 
-                          filter: 'blur(4px)' 
-                        },
-                        visible: { 
-                          opacity: 1, 
-                          y: 0, 
-                          filter: 'blur(0px)',
-                          transition: {
-                            duration: 0.45,
-                            ease: [0.215, 0.61, 0.355, 1]
-                          }
-                        }
-                      }}
-                      className="inline-block select-none"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </span>
+                  {word.text}
+                </motion.span>
               ))}
             </motion.h1>
 

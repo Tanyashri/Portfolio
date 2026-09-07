@@ -42,6 +42,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
   const [copiedCardId, setCopiedCardId] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
@@ -378,11 +387,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
               const stackY = (index - 2) * 5;
               const stackRotate = card.baseRotation * 1.8;
 
+              // Responsive scaling for scatter offset
+              const scaleFactor = windowWidth < 1024 ? (windowWidth < 800 ? 0.45 : 0.65) : 1;
+
               // When hovered (scattered across desk):
-              const targetX = isHovered ? card.scatterX : stackX;
+              const targetX = isHovered ? card.scatterX * scaleFactor : stackX;
               const targetY = isHovered ? (isCardHovered ? card.scatterY - 24 : card.scatterY) : stackY;
               const targetRotate = isHovered ? (isCardHovered ? 0 : card.scatterRotate) : stackRotate;
-              const targetScale = isCardHovered ? 1.08 : isHovered ? 1 : 1 - Math.abs(index - 2) * 0.02;
+              const targetScale = isCardHovered ? 1.06 : isHovered ? (windowWidth < 1024 ? 0.9 : 1) : 1 - Math.abs(index - 2) * 0.02;
               const targetZIndex = isCardHovered ? 50 : isHovered ? 20 + index : 10 + index;
 
               return (
