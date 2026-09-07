@@ -21,8 +21,6 @@
 
 A bespoke, dark-aesthetic, interactive digital portfolio showcasing full-stack systems, machine learning engineering, open-source contributions, technical leadership, and interactive project simulators.
 
-Designed and engineered with **React 19**, **TypeScript**, **Tailwind CSS**, and **Motion** for smooth animations and fluid micro-interactions.
-
 ---
 
 ## 🌟 Featured Highlights & Projects
@@ -32,57 +30,6 @@ Designed and engineered with **React 19**, **TypeScript**, **Tailwind CSS**, and
 - **🗣️ [Awaaz](https://github.com/Tanyashri)** — Voice-driven communication tool with accessibility-first UX and NLP processing.
 - **🕸️ GraphDB / YouTrackDB Ecosystem** — High-performance graph database exploration and indexing engine.
 - **🌐 Open Source & Community** — Active contributor in **GSSoC**, **SWoC**, **Hacktoberfest**, Lead at **Stack Forge Club**, and Organizer for **HackVerse**.
-
----
-
-## 🛠️ Tech Stack
-
-| Domain | Technologies |
-| :--- | :--- |
-| **Frontend & UI** | React 19, TypeScript, Tailwind CSS v4, Motion (Framer Motion), Lucide Icons |
-| **Build & Tooling** | Vite 6, Node.js |
-| **Deployment** | Vercel (Edge Network) |
-| **Languages & Core** | Python, C++, TypeScript, JavaScript, SQL |
-
----
-
-## 💻 Local Development
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Tanyashri/Portfolio.git
-cd Portfolio
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Start the development server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### 4. Build for Production
-```bash
-npm run build
-```
-
----
-
-## ☁️ Deployment
-
-Configured for seamless deployment on **Vercel** with single-page application routing handled via `vercel.json`:
-
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-```
 
 ---
 
