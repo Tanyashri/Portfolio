@@ -1,20 +1,100 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+
+# ✦ Tanyashri M — Portfolio ✦
+
+**Computer Science Engineer & AI/ML Builder**
+
+*“I build intelligent systems, useful products, and things that started as a questionable idea.”*
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://tanyashri-portfolio.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Tanyashri-181717?style=for-the-badge&logo=github)](https://github.com/Tanyashri)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Tanyashri%20M-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/tanyashri-m-94a74a234)
+[![LeetCode](https://img.shields.io/badge/LeetCode-tanyashrim2005-FFA116?style=for-the-badge&logo=leetcode)](https://leetcode.com/u/tanyashrim2005/)
+
+[🌐 **Explore Live Portfolio**](https://tanyashri-portfolio.vercel.app) · [📄 **View Resume**](https://drive.google.com/file/d/1SvhoFJsGLnCmhIhB1QJW7HoemXbg8HYi/view?usp=drivesdk) · [📫 **Get in Touch**](mailto:tanyashrim2005@gmail.com)
+
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## 🚀 Overview
 
-View your app in AI Studio: https://ai.studio/apps/a1f62bed-7c45-46ec-9240-e098d0a64169
+A bespoke, dark-aesthetic, interactive digital portfolio showcasing full-stack systems, machine learning engineering, open-source contributions, technical leadership, and interactive project simulators.
 
-## Run Locally
+Designed and engineered with **React 19**, **TypeScript**, **Tailwind CSS**, and **Motion** for smooth animations and fluid micro-interactions.
 
-**Prerequisites:**  Node.js
+---
 
+## 🌟 Featured Highlights & Projects
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **⚡ [AURA](https://github.com/Tanyashri)** — AI Model Monitoring Platform featuring a Shadow-Champion architecture for data drift analysis and zero-downtime evaluation against RBI/SEBI regulatory compliance patterns.
+- **🐝 [SkillHive](https://github.com/Tanyashri)** — Collaborative skill-sharing platform with real-time peer matching and feedback loops.
+- **🗣️ [Awaaz](https://github.com/Tanyashri)** — Voice-driven communication tool with accessibility-first UX and NLP processing.
+- **🕸️ GraphDB / YouTrackDB Ecosystem** — High-performance graph database exploration and indexing engine.
+- **🌐 Open Source & Community** — Active contributor in **GSSoC**, **SWoC**, **Hacktoberfest**, Lead at **Stack Forge Club**, and Organizer for **HackVerse**.
+
+---
+
+## 🛠️ Tech Stack
+
+| Domain | Technologies |
+| :--- | :--- |
+| **Frontend & UI** | React 19, TypeScript, Tailwind CSS v4, Motion (Framer Motion), Lucide Icons |
+| **Build & Tooling** | Vite 6, Node.js |
+| **Deployment** | Vercel (Edge Network) |
+| **Languages & Core** | Python, C++, TypeScript, JavaScript, SQL |
+
+---
+
+## 💻 Local Development
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Tanyashri/Portfolio.git
+cd Portfolio
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Start the development server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### 4. Build for Production
+```bash
+npm run build
+```
+
+---
+
+## ☁️ Deployment
+
+Configured for seamless deployment on **Vercel** with single-page application routing handled via `vercel.json`:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
+```
+
+---
+
+## 📬 Connect
+
+- **Email**: [tanyashrim2005@gmail.com](mailto:tanyashrim2005@gmail.com)
+- **LinkedIn**: [linkedin.com/in/tanyashri-m-94a74a234](https://www.linkedin.com/in/tanyashri-m-94a74a234)
+- **GitHub**: [@Tanyashri](https://github.com/Tanyashri)
+- **Discord**: [Join Discord](https://discord.gg/zECBkKXJB)
+
+---
+
+<div align="center">
+  <sub>Designed & Crafted by <b>Tanyashri M</b> © 2026</sub>
+</div>
