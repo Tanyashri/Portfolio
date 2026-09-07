@@ -11,7 +11,7 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Tanyashri%20M-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/tanyashri-m-94a74a234)
 [![LeetCode](https://img.shields.io/badge/LeetCode-tanyashrim2005-FFA116?style=for-the-badge&logo=leetcode)](https://leetcode.com/u/tanyashrim2005/)
 
-[🌐 **Explore Live Portfolio**](https://tanyashri-portfolio.vercel.app) · [📄 **View Resume**](https://drive.google.com/file/d/1SvhoFJsGLnCmhIhB1QJW7HoemXbg8HYi/view?usp=drivesdk) · [📫 **Get in Touch**](mailto:tanyashrim2005@gmail.com)
+[🌐 **Explore Live Portfolio**](https://tanyashri-portfolio.vercel.app) · [📄 **View Resume**](https://drive.google.com/file/d/1PS0BjMyPvlDDf4H8WbwDdUkwA4Qx6jHE/view?usp=drivesdk) · [📫 **Get in Touch**](mailto:tanyashrim2005@gmail.com)
 
 </div>
 

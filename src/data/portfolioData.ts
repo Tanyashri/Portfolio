@@ -11,7 +11,7 @@ export const PERSONAL_INFO = {
   linkedin: 'https://www.linkedin.com/in/tanyashri-m-94a74a234',
   leetcode: 'https://leetcode.com/u/tanyashrim2005/',
   discord: 'https://discord.gg/zECBkKXJB',
-  resumeUrl: 'https://drive.google.com/file/d/1SvhoFJsGLnCmhIhB1QJW7HoemXbg8HYi/view?usp=drivesdk',
+  resumeUrl: 'https://drive.google.com/file/d/1PS0BjMyPvlDDf4H8WbwDdUkwA4Qx6jHE/view?usp=drivesdk',
   education: {
     degree: 'B.E. in Computer Science & Engineering',
     institution: 'Maharaja Institute of Technology, Mysore',
